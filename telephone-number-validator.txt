@@ -1,0 +1,30 @@
+function telephoneCheck(ch) {
+  var counta = 0;
+  var countb = 0;
+  for (var i = 0; i < ch.length; i++) {
+    if(ch[i]=="("){counta++;}
+    if(ch[i]==")"){countb++;}
+}
+if(counta!=countb){return(false);}
+if(ch[0]=="(" && ch[4]!=")"){return(false);}
+
+else{
+  if(ch[0]=="-"){return(false);}
+  else{
+  var ch1="";
+  ch1 = ch.replaceAll('(','')
+  ch1 = ch1.replaceAll(')','')
+  ch1 = ch1.replaceAll('-','')
+  var check = ch1.includes(" ");
+  if(check){
+  if(ch1.split(" ")[0].length!=1 && ch1.split(" ")[0].length!=3){return(false);}}
+  ch1 = ch1.replaceAll(' ','')
+  const num = +ch1 ;
+  if(isNaN(num)){return(false);}
+  else{if (ch1[0]==="1"){if(ch1.length==11||ch1.length==10){return(true);}
+                      else{return(false);} }
+        else{if(ch1.length==10){return(true);}
+                     else{return(false);}  }
+     
+  }}
+}}
