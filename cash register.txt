@@ -1,0 +1,47 @@
+function checkCashRegister(price, cash, cid) {
+  const retour = cash-price;
+  const flouss = [
+    {currency : "PENNY",price: 0.01},
+    {currency : "NICKEL",price:  0.05},
+    {currency : "DIME",price:  0.1},
+    {currency : "QUARTER",price:  0.25},
+    {currency : "ONE",price:  1},
+    {currency : "FIVE",price:  5},
+    {currency : "TEN",price:  10},
+    {currency : "TWENTY",price:  20},
+    {currency : "ONE HUNDRED",price:  100}
+]
+var compt = 0;
+for(let i=0;i<flouss.length;i++){
+        if(flouss[i].price <= retour){
+            compt++;
+        }else{
+            break;
+        }
+    }
+let newchange = []
+let change = retour;    
+ while(change!=0 && compt>=0){
+    if (cid[compt][1]<=change){
+      change-=cid[compt][1];
+      newchange.push([cid[compt][0],cid[compt][1]])
+    }
+    else{
+      var diiv = Math.floor(cid[compt][1]/flouss[compt].price);
+      newchange.push([cid[compt][0],cid[compt][1]- diiv*flouss[compt].price])}
+    compt--;
+ }
+
+ if(compt<0){return({status: "INSUFFICIENT_FUNDS", change: []})}
+ var statuss = "CLOSED";
+ if(change==0){
+   for(let i=0;i<cid.length;i++){
+        if(cid[i][1] != 0){
+            statuss = "OPEN";
+            break;
+        }
+    }
+return({status : statuss , change: newchange})
+ }
+
+}
